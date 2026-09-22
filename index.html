@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Brain Dump ✦</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body data-theme="light">
+
+  <!-- =========================
+       APP
+  ========================== -->
+  <div class="app">
+
+    <!-- SIDEBAR / NAVEGACIÓN -->
+    <aside class="sidebar">
+      <div class="logo">
+        <span class="logo-mark">✦</span>
+        <div>
+          <strong>Brain Dump</strong>
+          <small>para cerebros con 47 pestañas abiertas</small>
+        </div>
+      </div>
+
+      <nav class="nav">
+        <button class="nav-btn active" data-section="dashboard">
+          <span>⌂</span>
+          <span>Inicio</span>
+        </button>
+
+        <button class="nav-btn" data-section="tasks">
+          <span>✓</span>
+          <span>Tareas</span>
+        </button>
+
+        <button class="nav-btn" data-section="ideas">
+          <span>✦</span>
+          <span>Ideas</span>
+        </button>
+
+        <button class="nav-btn" data-section="paint">
+          <span>✎</span>
+          <span>Mini Paint</span>
+        </button>
+
+        <button class="nav-btn" data-section="settings">
+          <span>⚙</span>
+          <span>Ajustes</span>
+        </button>
+      </nav>
+
+      <div class="sidebar-footer">
+        <span class="status-dot"></span>
+        <span>Guardado localmente</span>
+      </div>
+    </aside>
+
+
+    <!-- CONTENIDO PRINCIPAL -->
+    <main class="main-content">
+
+      <!-- =========================
+           DASHBOARD
+      ========================== -->
+      <section id="dashboard" class="section active">
+
+        <div class="topbar">
+          <span class="eyebrow">HOY</span>
+          <span id="currentDate"></span>
+        </div>
+
+        <div class="hero-card">
+          <div>
+            <p class="eyebrow">TU CEREBRO REPORTA</p>
+
+            <h1 id="greeting">
+              Buenas. Sobrevivimos otro día.
+            </h1>
+
+            <p id="randomReminder" class="hero-subtitle">
+              Cargando recordatorio...
+            </p>
+          </div>
+
+          <div class="hero-decoration">
+            <span>✦</span>
+            <span>✧</span>
+            <span>·</span>
+          </div>
+        </div>
+
+
+        <div class="dashboard-grid">
+
+          <div class="stat-card">
+            <span class="stat-icon">✓</span>
+            <div>
+              <strong id="pendingCount">0</strong>
+              <span>tareas pendientes</span>
+            </div>
+          </div>
+
+          <div class="stat-card">
+            <span class="stat-icon">✦</span>
+            <div>
+              <strong id="ideaCount">0</strong>
+              <span>ideas guardadas</span>
+            </div>
+          </div>
+
+          <button class="quick-action" data-section="tasks">
+            <span>+</span>
+            <div>
+              <strong>Agregar tarea</strong>
+              <small>Sácala de tu cabeza</small>
+            </div>
+          </button>
+
+        </div>
+
+
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">SIN PRESIÓN</p>
+            <h2>¿Qué necesitas hacer?</h2>
+          </div>
+        </div>
+
+        <div class="quick-grid">
+
+          <button class="big-action" data-section="tasks">
+            <span class="big-action-icon">✓</span>
+            <strong>Organizar tareas</strong>
+            <small>Cole, casa y otras cosas</small>
+          </button>
+
+          <button class="big-action" data-section="ideas">
+            <span class="big-action-icon">✦</span>
+            <strong>Estoy aburrida</strong>
+            <small>Dame algo que hacer</small>
+          </button>
+
+          <button class="big-action" data-section="paint">
+            <span class="big-action-icon">✎</span>
+            <strong>Quiero dibujar</strong>
+            <small>Mini Paint</small>
+          </button>
+
+        </div>
+      </section>
+
+
+      <!-- =========================
+           TAREAS
+      ========================== -->
+      <section id="tasks" class="section">
+
+        <div class="page-header">
+          <div>
+            <p class="eyebrow">ORGANIZACIÓN</p>
+            <h1>Tareas</h1>
+            <p>Una cosa a la vez. Literalmente.</p>
+          </div>
+        </div>
+
+
+        <!-- INPUT -->
+        <div class="task-input-card">
+
+          <input
+            type="text"
+            id="taskInput"
+            placeholder="¿Qué tienes que hacer?"
+            autocomplete="off"
+          >
+
+          <select id="taskCategory">
+            <option value="Cole">Cole</option>
+            <option value="Casa">Casa</option>
+            <option value="Otros">Pendientes / Otros</option>
+          </select>
+
+          <button id="addTaskBtn" class="primary-btn">
+            <span>+</span>
+            Añadir
+          </button>
+
+        </div>
+
+
+        <!-- CATEGORÍAS -->
+        <div class="task-columns">
+
+          <div class="task-column" data-category="Cole">
+            <div class="column-title">
+              <span class="category-dot school"></span>
+              <h2>Cole</h2>
+              <span class="task-number">0</span>
+            </div>
+
+            <div id="Cole-tasks" class="task-list"></div>
+          </div>
+
+
+          <div class="task-column" data-category="Casa">
+            <div class="column-title">
+              <span class="category-dot home"></span>
+              <h2>Casa</h2>
+              <span class="task-number">0</span>
+            </div>
+
+            <div id="Casa-tasks" class="task-list"></div>
+          </div>
+
+
+          <div class="task-column" data-category="Otros">
+            <div class="column-title">
+              <span class="category-dot other"></span>
+              <h2>Pendientes / Otros</h2>
+              <span class="task-number">0</span>
+            </div>
+
+            <div id="Otros-tasks" class="task-list"></div>
+          </div>
+
+        </div>
+      </section>
+
+
+      <!-- =========================
+           IDEAS
+      ========================== -->
+      <section id="ideas" class="section">
+
+        <div class="page-header">
+          <div>
+            <p class="eyebrow">ANTI ABURRIMIENTO</p>
+            <h1>En vez de pudrirme en la cama</h1>
+            <p>Cosas que podrías hacer cuando tu cerebro dice "meh".</p>
+          </div>
+        </div>
+
+
+        <div class="dopamine-card">
+
+          <div class="dopamine-symbol">✦</div>
+
+          <div>
+            <p class="eyebrow">BOTÓN DE EMERGENCIA</p>
+            <h2 id="ideaSuggestion">Necesito dopamina.</h2>
+            <p id="ideaDescription">
+              Presiona el botón y deja que el universo decida.
+            </p>
+          </div>
+
+          <button id="dopamineBtn" class="dopamine-btn">
+            Dame algo
+          </button>
+
+        </div>
+
+
+        <div class="idea-add">
+          <input
+            type="text"
+            id="ideaInput"
+            placeholder="Añade una idea..."
+            autocomplete="off"
+          >
+
+          <button id="addIdeaBtn" class="primary-btn">
+            + Añadir
+          </button>
+        </div>
+
+
+        <div id="ideasList" class="ideas-grid"></div>
+
+      </section>
+
+
+      <!-- =========================
+           MINI PAINT
+      ========================== -->
+      <section id="paint" class="section">
+
+        <div class="page-header paint-header">
+          <div>
+            <p class="eyebrow">CREATIVIDAD</p>
+            <h1>Mini Paint</h1>
+            <p>Dibuja. Garabatea. Haz algo completamente innecesario.</p>
+          </div>
+
+          <div class="paint-timer">
+            <span class="timer-dot"></span>
+            <span id="paintTimer">00:00</span>
+          </div>
+        </div>
+
+
+        <div class="paint-layout">
+
+          <!-- HERRAMIENTAS -->
+          <aside class="paint-tools">
+
+            <div class="tool-group">
+              <label>Herramienta</label>
+
+              <button
+                class="tool-btn active"
+                id="brushTool"
+                title="Pincel"
+              >
+                ✎ Pincel
+              </button>
+
+              <button
+                class="tool-btn"
+                id="eraserTool"
+                title="Borrador"
+              >
+                ◌ Borrador
+              </button>
+            </div>
+
+
+            <div class="tool-group">
+              <label>Tamaño</label>
+
+              <input
+                type="range"
+                id="brushSize"
+                min="1"
+                max="50"
+                value="8"
+              >
+
+              <span id="brushSizeValue">8 px</span>
+            </div>
+
+
+            <div class="tool-group">
+              <label>Color</label>
+
+              <input
+                type="color"
+                id="colorPicker"
+                value="#252525"
+              >
+            </div>
+
+
+            <div class="tool-group">
+              <label>Capa</label>
+
+              <button class="layer-btn active" data-layer="1">
+                Capa 1 · Fondo
+              </button>
+
+              <button class="layer-btn" data-layer="2">
+                Capa 2 · Dibujo
+              </button>
+            </div>
+
+
+            <div class="paint-actions">
+              <button id="clearCanvasBtn" class="secondary-btn">
+                Limpiar
+              </button>
+
+              <button id="downloadBtn" class="primary-btn">
+                ↓ Descargar
+              </button>
+            </div>
+
+          </aside>
+
+
+          <!-- CANVAS -->
+          <div class="canvas-wrapper">
+
+            <div class="canvas-container">
+              <canvas id="paintCanvas"></canvas>
+            </div>
+
+            <div class="canvas-hint">
+              <span>●</span>
+              Tu dibujo se queda aquí mientras trabajas.
+            </div>
+
+          </div>
+
+        </div>
+      </section>
+
+
+      <!-- =========================
+           AJUSTES
+      ========================== -->
+      <section id="settings" class="section">
+
+        <div class="page-header">
+          <div>
+            <p class="eyebrow">PERSONALIZACIÓN</p>
+            <h1>Ajustes</h1>
+            <p>Haz que la página se sienta como tuya.</p>
+          </div>
+        </div>
+
+
+        <div class="settings-card">
+
+          <div class="settings-row">
+            <div>
+              <h2>Tema visual</h2>
+              <p>Cambia toda la interfaz instantáneamente.</p>
+            </div>
+
+            <div class="theme-grid">
+
+              <button class="theme-btn active" data-theme-choice="light">
+                <span class="theme-preview light-preview"></span>
+                Light
+              </button>
+
+              <button class="theme-btn" data-theme-choice="dark">
+                <span class="theme-preview dark-preview"></span>
+                Dark
+              </button>
+
+              <button class="theme-btn" data-theme-choice="pink">
+                <span class="theme-preview pink-preview"></span>
+                Rosa
+              </button>
+
+              <button class="theme-btn" data-theme-choice="funky">
+                <span class="theme-preview funky-preview"></span>
+                Funky
+              </button>
+
+              <button class="theme-btn" data-theme-choice="sage">
+                <span class="theme-preview sage-preview"></span>
+                Sage
+              </button>
+
+              <button class="theme-btn" data-theme-choice="lavender">
+                <span class="theme-preview lavender-preview"></span>
+                Lavender
+              </button>
+
+            </div>
+          </div>
+
+
+          <div class="settings-divider"></div>
+
+
+          <div class="settings-row">
+            <div>
+              <h2>Alerta de dibujo</h2>
+              <p>Te avisa después de 5 minutos dibujando.</p>
+            </div>
+
+            <label class="switch">
+              <input type="checkbox" id="drawingAlert" checked>
+              <span class="slider"></span>
+            </label>
+          </div>
+
+
+          <div class="settings-divider"></div>
+
+
+          <div class="settings-row danger-row">
+            <div>
+              <h2>Datos</h2>
+              <p>Todo se guarda solamente en este navegador.</p>
+            </div>
+
+            <button id="resetDataBtn" class="danger-btn">
+              Borrar mis datos
+            </button>
+          </div>
+
+        </div>
+
+      </section>
+
+    </main>
+  </div>
+
+
+  <!-- =========================
+       ALERTA DE TIEMPO
+  ========================== -->
+  <div id="timeAlert" class="time-alert">
+
+    <button id="closeAlert" class="close-alert">
+      ×
+    </button>
+
+    <span class="alert-icon">⏰</span>
+
+    <div>
+      <strong>Ey. Pausa.</strong>
+      <p>
+        ¡Ya pasaste dms tiempo dibujando, no me jodas,
+        estás en clase!
+      </p>
+    </div>
+
+  </div>
+
+
+  <script src="script.js"></script>
+</body>
+</html>
